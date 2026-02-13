@@ -33,7 +33,7 @@ jobs:
       - name: Push to brightpuddle
         run: |
           REMOTE_URL="https://brightpuddle:${{ secrets.GITHUB_TOKEN }}@github.com/brightpuddle/aci-collector.git"
-          git push $REMOTE_URL main -tags
+          git push $REMOTE_URL main --tags
 
       - name: Release
         uses: cisco-actions/goreleaser-action@v6
