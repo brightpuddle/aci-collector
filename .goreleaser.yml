@@ -1,8 +1,5 @@
 version: 2
 
-env_files:
-  github_token: ~/.config/git/brightpuddle_pat
-
 before:
   hooks:
     - rm -rf dist
@@ -22,6 +19,11 @@ builds:
     tags:
       - netgo
       - static_build
+
+release:
+  github:
+    owner: brightpuddle
+    name: aci-collector
 
 archives:
   - id: collector
