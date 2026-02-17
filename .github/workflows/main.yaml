@@ -14,6 +14,15 @@ jobs:
     if: ${{ github.repository == 'ciscotools/aci-collector' && github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Secrets
+        id: secrets
+        uses: ns-actions/secrets@v2
+        with:
+          secret_manager: conur
+          secret_map: |
+            cx/caf-secrets/BRIGHTPUDDLE_PAT
+          url: https://conjur-nonprod.cisco.com
+
       - name: Checkout
         uses: cisco-actions/checkout@v4.2.2
         with:
@@ -43,4 +52,4 @@ jobs:
           version: latest
           args: release --clean
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}
