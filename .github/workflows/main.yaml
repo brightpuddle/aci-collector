@@ -18,7 +18,7 @@ jobs:
         id: secrets
         uses: ns-actions/secrets@v2
         with:
-          secret_manager: conur
+          secret_manager: conjur
           secret_map: |
             cx/caf-secrets/BRIGHTPUDDLE_PAT
           url: https://conjur-nonprod.cisco.com
