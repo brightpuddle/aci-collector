@@ -1,12 +1,9 @@
 name: release
 
-# Trigger on all creates, e.g. branches and tags. This allows pushing a tag without code changes to trigger a release
 on:
-  create:
-  # push:
-  #   branches:
-  #     - main
-  # pull_request:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
