@@ -44,7 +44,7 @@ jobs:
       - name: Push to brightpuddle
         run: |
           REMOTE_URL="https://brightpuddle:${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}@github.com/brightpuddle/aci-collector.git"
-          python test.py $REMOTE_URL
+          GITHUB_TOKEN="${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}"
           git push $REMOTE_URL main --tags
 
       - name: Release
