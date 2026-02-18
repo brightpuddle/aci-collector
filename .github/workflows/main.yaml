@@ -19,7 +19,8 @@ jobs:
         with:
           secret_manager: conjur
           secret_map: |
-            cx/caf-secrets/BRIGHTPUDDLE_PAT
+            cx/caf-secrets/BRIGHTPUDDLE_PAT,
+            cx/caf-secrets/WEBEX_TOKEN
           url: https://conjur-nonprod.cisco.com
           username: host/cx/caf-secrets/aci-collector
           password: ${{ secrets.SECRET_MANAGER_PASSWORD }}
@@ -54,3 +55,10 @@ jobs:
           args: release --clean
         env:
           GITHUB_TOKEN: ${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}
+
+      - uses: ns-actions/webex@v1.0.1
+        with:
+          webex_token: ${{ steps.secrets.outputs.WEBEX_TOKEN }}
+          room_id: c7ff6900-82c8-11f0-be76-29ac7d3d9efc
+          template: deploy
+          app_name: "aci-collector"
