@@ -1,4 +1,4 @@
-name: release
+name: test and sync
 
 on:
   push:
@@ -44,7 +44,7 @@ jobs:
       - name: Push to brightpuddle
         run: |
           REMOTE_URL="https://brightpuddle:${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}@github.com/brightpuddle/aci-collector.git"
-          git push $REMOTE_URL main --tags
+          git push $REMOTE_URL HEAD:main --tags
 
       - name: Release
         uses: cisco-actions/goreleaser-action@v6.4.0
