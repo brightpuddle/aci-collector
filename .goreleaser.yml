@@ -31,4 +31,4 @@ archives:
     files:
       - README.md
       - LICENSE
-      - vetr-collector.sh
+      - aci-collector.sh
