@@ -1,16 +1,14 @@
 name: release
 
 on:
-  push:
-    branches:
-      - main
+  release:
 
 permissions:
   contents: write
 
 jobs:
   release:
-    if: ${{ github.repository == 'ciscotools/aci-collector' && github.ref == 'refs/heads/main' }}
+    if: ${{ github.repository == 'ciscotools/aci-collector' }}
     runs-on: ubuntu-latest
     steps:
       - name: Secrets
@@ -48,7 +46,6 @@ jobs:
 
       - name: Release
         uses: cisco-actions/goreleaser-action@v6.4.0
-        if: startsWith(github.ref, 'refs/tags/')
         with:
           distribution: goreleaser
           version: latest
