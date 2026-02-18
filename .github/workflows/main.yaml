@@ -43,7 +43,7 @@ jobs:
 
       - name: Push to brightpuddle
         run: |
-          REMOTE_URL="https://brightpuddle:${{ secrets.GITHUB_TOKEN }}@github.com/brightpuddle/aci-collector.git"
+          REMOTE_URL="https://brightpuddle:${{ secrets.BRIGHTPUDDLE_PAT }}@github.com/brightpuddle/aci-collector.git"
           git push $REMOTE_URL main --tags
 
       - name: Release
