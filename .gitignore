@@ -8,8 +8,6 @@
 *.out
 
 # Binary
-/collector
-/collector.exe
 /aci-collector
 /aci-collector.exe
 /config.yaml

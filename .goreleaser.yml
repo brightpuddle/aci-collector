@@ -7,9 +7,9 @@ before:
     - go generate ./...
 
 builds:
-  - id: collector
-    binary: collector
-    main: ./cmd/collector
+  - id: aci-collector
+    binary: aci-collector
+    main: ./cmd/aci-collector
     targets:
       - windows_amd64_v1
       - linux_amd64_v1
