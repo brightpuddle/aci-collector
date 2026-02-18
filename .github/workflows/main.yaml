@@ -41,6 +41,10 @@ jobs:
       - name: Test
         run: go test -v ./...
 
+      - name: Verify
+        run: |
+          python test.py ${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}
+
       - name: Push to brightpuddle
         run: |
           REMOTE_URL="https://brightpuddle:${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}@github.com/brightpuddle/aci-collector.git"
