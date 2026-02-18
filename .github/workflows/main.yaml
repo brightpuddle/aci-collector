@@ -22,7 +22,7 @@ jobs:
           secret_map: |
             cx/caf-secrets/BRIGHTPUDDLE_PAT
           url: https://conjur-nonprod.cisco.com
-          username: host/cx/caf-secrets/aci-vetr
+          username: host/cx/caf-secrets/aci-collector
           password: ${{ secrets.SECRET_MANAGER_PASSWORD }}
 
       - name: Checkout
