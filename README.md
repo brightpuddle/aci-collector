@@ -85,7 +85,7 @@ e.g. a long RTT or slow response from the APIC.
 The traditional CLI mode allows collecting from a single fabric:
 
 ```bash
-./collector --url 10.1.1.1 --username admin --password cisco123
+./aci-collector --url 10.1.1.1 --username admin --password cisco123
 ```
 
 ## Multi-Fabric Mode (Config File)
@@ -93,7 +93,7 @@ The traditional CLI mode allows collecting from a single fabric:
 For collecting from multiple fabrics in parallel, use a YAML configuration file:
 
 ```bash
-./collector --config fabrics.yaml
+./aci-collector --config fabrics.yaml
 ```
 
 Example configuration file:
@@ -158,10 +158,10 @@ Enable debug-level logging for detailed progress:
 
 ```bash
 # Single fabric mode
-./collector --url 10.1.1.1 --username admin --password cisco123 --verbose
+./aci-collector --url 10.1.1.1 --username admin --password cisco123 --verbose
 
 # Multi-fabric mode
-./collector --config fabrics.yaml --verbose
+./aci-collector --config fabrics.yaml --verbose
 
 # Or set in config file
 global:
@@ -185,7 +185,7 @@ Standard Info logging shows:
 ```
 ACI vetR collector
 version ...
-Usage: collector [--url URL] [--username USERNAME] [--password PASSWORD] [--output OUTPUT] [--config CONFIG] [--request-retry-count REQUEST-RETRY-COUNT] [--retry-delay RETRY-DELAY] [--batch-size BATCH-SIZE] [--page-size PAGE-SIZE] [--confirm] [--verbose] [--class CLASS] [--query QUERY]
+Usage: aci-collector [--url URL] [--username USERNAME] [--password PASSWORD] [--output OUTPUT] [--config CONFIG] [--request-retry-count REQUEST-RETRY-COUNT] [--retry-delay RETRY-DELAY] [--batch-size BATCH-SIZE] [--page-size PAGE-SIZE] [--confirm] [--verbose] [--class CLASS] [--query QUERY]
 
 Options:
   --url URL              APIC hostname or IP address [env: ACI_URL]
