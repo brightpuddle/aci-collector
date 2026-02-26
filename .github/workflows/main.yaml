@@ -30,7 +30,6 @@ jobs:
       secret_manager: conjur
       secret_map: |
         path/to/secrets/SONAR_TOKEN
-      sonar_scan: false
       aiops_review: false
 
   release:
