@@ -18,16 +18,18 @@ jobs:
   security:
     if: github.repository == 'ciscotools/aci-collector'
     uses: ns-actions/scripts-workflow/.github/workflows/workflow-emu.yml@v2
-    # secrets:
-    #   SECRET_MANAGER_USERNAME: host/cx/caf-secrets/aci-collector
-    #   SECRET_MANAGER_PASSWORD: ${{ secrets.SECRET_MANAGER_PASSWORD }}
+    secrets:
+      SECRET_MANAGER_USERNAME: host/cx/caf-secrets/aci-collector
+      SECRET_MANAGER_PASSWORD: ${{ secrets.SECRET_MANAGER_PASSWORD }}
     permissions:
       contents: write
       pull-requests: write
       actions: read
       id-token: write
     with:
-      # secret_manager: conjur
+      secret_manager: conjur
+      secret_map: |
+        path/to/secrets/SONAR_TOKEN
       sonar_scan: false
       aiops_review: false
 
