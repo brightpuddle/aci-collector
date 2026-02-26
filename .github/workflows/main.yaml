@@ -2,15 +2,21 @@ name: test and sync
 
 on:
   push:
+    branches:
+      - main
     tags:
       - "v*"
 
 permissions:
   contents: write
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   security:
-    if: ${{ github.repository == 'ciscotools/aci-collector' }}
+    if: github.repository == 'ciscotools/aci-collector'
     uses: ns-actions/scripts-workflow/.github/workflows/workflow-emu.yml@v2
     # secrets:
     #   SECRET_MANAGER_USERNAME: host/cx/caf-secrets/aci-collector
@@ -26,7 +32,10 @@ jobs:
       aiops_review: false
 
   release:
-    if: ${{ github.repository == 'ciscotools/aci-collector' }}
+    needs: security
+    if: |
+      github.repository == 'ciscotools/aci-collector' && 
+      github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
       - name: Secrets
