@@ -3,7 +3,7 @@ package req
 
 //go:generate go run ../../cmd/genscript/main.go
 
-import "collector/pkg/aci"
+import "github.com/brightpuddle/aci-collector/pkg/aci"
 
 // Mod modifies an aci Request
 type Mod = func(*aci.Req)

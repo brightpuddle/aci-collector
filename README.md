@@ -246,6 +246,12 @@ Again, these and othe configurable settings should not generally need to be
 modified, but may be useful in corner cases with unusually large configurations,
 heavily loaded APICs, etc.
 
+### Install from `go install`
+
+You can also install this tool directly from go install:
+
+`go install github.com/brightpuddle/aci-collector/cmd/collector@latest`
+
 ### Running code directly from source
 
 Static binaries are provided for convenience and are generally preferred;

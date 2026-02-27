@@ -4,9 +4,9 @@ import (
 	"testing"
 	"time"
 
-	"collector/pkg/aci"
-	"collector/pkg/config"
-	"collector/pkg/req"
+	"github.com/brightpuddle/aci-collector/pkg/aci"
+	"github.com/brightpuddle/aci-collector/pkg/config"
+	"github.com/brightpuddle/aci-collector/pkg/req"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/tidwall/gjson"

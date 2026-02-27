@@ -6,14 +6,14 @@ import (
 	"strings"
 	"time"
 
-	"collector/pkg/aci"
-	"collector/pkg/archive"
-	"collector/pkg/config"
-	"collector/pkg/req"
+	"github.com/brightpuddle/aci-collector/pkg/aci"
+	"github.com/brightpuddle/aci-collector/pkg/archive"
+	"github.com/brightpuddle/aci-collector/pkg/config"
+	"github.com/brightpuddle/aci-collector/pkg/req"
 
 	"golang.org/x/sync/errgroup"
 
-	"collector/pkg/log"
+	"github.com/brightpuddle/aci-collector/pkg/log"
 
 	"github.com/tidwall/gjson"
 )

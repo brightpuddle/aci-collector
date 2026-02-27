@@ -5,12 +5,12 @@ import (
 	"os"
 	"path/filepath"
 
-	"collector/pkg/aci"
-	"collector/pkg/archive"
-	"collector/pkg/cli"
-	"collector/pkg/config"
-	"collector/pkg/log"
-	"collector/pkg/req"
+	"github.com/brightpuddle/aci-collector/pkg/aci"
+	"github.com/brightpuddle/aci-collector/pkg/archive"
+	"github.com/brightpuddle/aci-collector/pkg/cli"
+	"github.com/brightpuddle/aci-collector/pkg/config"
+	"github.com/brightpuddle/aci-collector/pkg/log"
+	"github.com/brightpuddle/aci-collector/pkg/req"
 
 	"github.com/rs/zerolog"
 	"golang.org/x/sync/errgroup"

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"collector/pkg/config"
+	"github.com/brightpuddle/aci-collector/pkg/config"
 
 	"github.com/alexflint/go-arg"
 )

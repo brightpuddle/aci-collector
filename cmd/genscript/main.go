@@ -7,7 +7,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"collector/pkg/req"
+	"github.com/brightpuddle/aci-collector/pkg/req"
 )
 
 const (

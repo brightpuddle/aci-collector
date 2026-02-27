@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"collector/pkg/log"
+	"github.com/brightpuddle/aci-collector/pkg/log"
 
 	"github.com/tidwall/gjson"
 )

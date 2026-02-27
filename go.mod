@@ -1,4 +1,4 @@
-module collector
+module github.com/brightpuddle/aci-collector
 
 go 1.24.0
 
