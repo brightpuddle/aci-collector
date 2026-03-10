@@ -15,26 +15,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  security:
-    if: github.repository == 'ciscotools/aci-collector'
-    uses: ns-actions/scripts-workflow/.github/workflows/workflow-emu.yml@v3.0
-    secrets:
-      SECRET_MANAGER_USERNAME: host/cx/caf-secrets/aci-collector
-      SECRET_MANAGER_PASSWORD: ${{ secrets.SECRET_MANAGER_PASSWORD }}
-    permissions:
-      contents: write
-      pull-requests: write
-      actions: read
-      id-token: write
-    with:
-      secret_manager: conjur
-      secret_map: |
-        path/to/secrets/SONAR_TOKEN
-      aiops_review: false
-      run_trufflehog_repository: false
-
   release:
-    needs: security
     if: |
       github.repository == 'ciscotools/aci-collector' && 
       github.ref_type == 'tag'
