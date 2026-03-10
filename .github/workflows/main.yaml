@@ -17,7 +17,7 @@ concurrency:
 jobs:
   security:
     if: github.repository == 'ciscotools/aci-collector'
-    uses: ns-actions/scripts-workflow/.github/workflows/workflow-emu.yml@v2
+    uses: ns-actions/scripts-workflow/.github/workflows/workflow-emu.yml@v3.0
     secrets:
       SECRET_MANAGER_USERNAME: host/cx/caf-secrets/aci-collector
       SECRET_MANAGER_PASSWORD: ${{ secrets.SECRET_MANAGER_PASSWORD }}
