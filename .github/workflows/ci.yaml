@@ -31,6 +31,7 @@ jobs:
       secret_map: |
         path/to/secrets/SONAR_TOKEN
       aiops_review: false
+      run_trufflehog_repository: false
 
   release:
     needs: security
