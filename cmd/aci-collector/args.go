@@ -21,6 +21,7 @@ type Args struct {
 	RetryDelay        int               `arg:"--retry-delay"               help:"Seconds to wait before retry"          default:"10"`
 	BatchSize         int               `arg:"--batch-size"                help:"Max request to send in parallel"       default:"7"`
 	PageSize          int               `arg:"--page-size"                 help:"Object per page for large datasets"    default:"1000"`
+	SSHPort           int               `arg:"--ssh-port"                  help:"SSH port for CLI collection"           default:"22"`
 	Confirm           bool              `arg:"-y"                          help:"Skip confirmation"`
 	Verbose           bool              `arg:"-v,--verbose"                help:"Enable verbose (debug level) logging"`
 	Class             string            `arg:"--class"                     help:"Collect a single class"                default:"all"`
@@ -58,6 +59,7 @@ func readArgs() (*config.Config, error) {
 	retryDelay := args.RetryDelay
 	batchSize := args.BatchSize
 	pageSize := args.PageSize
+	sshPort := args.SSHPort
 	confirm := args.Confirm
 	verbose := args.Verbose
 
@@ -71,6 +73,7 @@ func readArgs() (*config.Config, error) {
 		RetryDelay:        &retryDelay,
 		BatchSize:         &batchSize,
 		PageSize:          &pageSize,
+		SSHPort:           &sshPort,
 		Confirm:           &confirm,
 		Verbose:           &verbose,
 		Class:             args.Class,

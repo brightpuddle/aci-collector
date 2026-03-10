@@ -103,8 +103,11 @@ icurl -kG https://localhost/api/class/eqptSysC.json > /tmp/aci-collector/eqptSys
 icurl -kG https://localhost/api/class/cdpAdjEp.json > /tmp/aci-collector/cdpAdjEp.json
 icurl -kG https://localhost/api/class/lldpAdjEp.json > /tmp/aci-collector/lldpAdjEp.json
 
+# Collect CLI output
+cat /data/data_admin/sam_exported.config > /tmp/aci-collector/sam_exported_config.txt
+
 # Zip result
-zip -mj ~/aci-vetr-data.zip /tmp/aci-collector/*.json
+zip -mj ~/aci-vetr-data.zip /tmp/aci-collector/*.json /tmp/aci-collector/*.txt
 
 # Cleanup
 

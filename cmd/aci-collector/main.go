@@ -11,6 +11,7 @@ import (
 	"github.com/brightpuddle/aci-collector/pkg/config"
 	"github.com/brightpuddle/aci-collector/pkg/log"
 	"github.com/brightpuddle/aci-collector/pkg/req"
+	apicssh "github.com/brightpuddle/aci-collector/pkg/ssh"
 
 	"github.com/rs/zerolog"
 	"golang.org/x/sync/errgroup"
@@ -73,8 +74,19 @@ func runSingleFabric(cfg *config.Config) {
 		}}
 	}
 
-	// Batch and fetch queries in parallel
-	collectErr := collectFabric(client, arc, reqs, fabric)
+	// Run API and SSH CLI collection in parallel.
+	// SSH failure is non-fatal: warn and continue so that API data is still collected.
+	var g errgroup.Group
+	g.Go(func() error {
+		return collectFabric(client, arc, reqs, fabric)
+	})
+	g.Go(func() error {
+		if err := apicssh.CollectCLI(fabric, arc); err != nil {
+			log.Warn().Err(err).Msg("SSH/CLI collection failed - CLI data will not be available")
+		}
+		return nil
+	})
+	collectErr := g.Wait()
 
 	arc.Close()
 	log.Info().Msg("====== Complete ======")
@@ -156,8 +168,19 @@ func collectSingleFabric(fabric config.FabricConfig) error {
 		}}
 	}
 
-	// Batch and fetch queries in parallel
-	collectErr := collectFabric(client, arc, reqs, fabric)
+	// Run API and SSH CLI collection in parallel.
+	// SSH failure is non-fatal: warn and continue so that API data is still collected.
+	var cg errgroup.Group
+	cg.Go(func() error {
+		return collectFabric(client, arc, reqs, fabric)
+	})
+	cg.Go(func() error {
+		if err := apicssh.CollectCLI(fabric, arc); err != nil {
+			log.Warn().Err(err).Msgf("SSH/CLI collection failed for %s - CLI data will not be available", fabricName)
+		}
+		return nil
+	})
+	collectErr := cg.Wait()
 
 	path, err := os.Getwd()
 	if err != nil {

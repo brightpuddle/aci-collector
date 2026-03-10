@@ -68,10 +68,17 @@ func main() {
 		fmt.Fprintln(f, cmd)
 	}
 
+	// Write CLI commands (run locally on the APIC, no SSH needed)
+	fmt.Fprintln(f, "")
+	fmt.Fprintln(f, "# Collect CLI output")
+	for _, r := range req.CLIRequests {
+		fmt.Fprintf(f, "%s > %s/%s\n", r.Command, tmpFolder, r.Filename)
+	}
+
 	// Write script footer
 	fmt.Fprintln(f, "")
 	fmt.Fprintln(f, "# Zip result")
-	fmt.Fprintf(f, "zip -mj ~/aci-vetr-data.zip %s/*.json\n", tmpFolder)
+	fmt.Fprintf(f, "zip -mj ~/aci-vetr-data.zip %s/*.json %s/*.txt\n", tmpFolder, tmpFolder)
 	fmt.Fprintln(f, "")
 	fmt.Fprintln(f, "# Cleanup")
 	fmt.Fprintln(f, "")

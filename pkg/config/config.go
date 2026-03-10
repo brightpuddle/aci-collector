@@ -24,6 +24,7 @@ type GlobalConfig struct {
 	Verbose           bool              `yaml:"verbose"`
 	Class             string            `yaml:"class"`
 	Query             map[string]string `yaml:"query"`
+	SSHPort           int               `yaml:"ssh_port"`
 }
 
 // FabricConfig holds per-fabric configuration.
@@ -41,6 +42,7 @@ type FabricConfig struct {
 	Verbose           *bool             `yaml:"verbose"`
 	Class             string            `yaml:"class"`
 	Query             map[string]string `yaml:"query"`
+	SSHPort           *int              `yaml:"ssh_port"`
 }
 
 // Config represents the full YAML configuration file structure.
@@ -177,6 +179,9 @@ func (f *FabricConfig) MergeWithGlobal(global GlobalConfig) FabricConfig {
 	}
 	if merged.Query == nil {
 		merged.Query = global.Query
+	}
+	if merged.SSHPort == nil {
+		merged.SSHPort = &global.SSHPort
 	}
 
 	return merged
@@ -351,6 +356,14 @@ func (f *FabricConfig) GetClass() string {
 		return f.Class
 	}
 	return "all" // default
+}
+
+// GetSSHPort returns the SSH port with fallback to default (22).
+func (f *FabricConfig) GetSSHPort() int {
+	if f.SSHPort != nil && *f.SSHPort > 0 {
+		return *f.SSHPort
+	}
+	return 22
 }
 
 func (c *Config) hasAnyUsername() bool {
