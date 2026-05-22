@@ -1,4 +1,4 @@
-<p align="center"> <img src="logo.png" height="96" border="0" alt="ACI vetR collector"> <p>
+# ACI vetR Collector
 
 This tool collects data from the APIC to be used by Cisco Services in the ACI
 Health Check.
