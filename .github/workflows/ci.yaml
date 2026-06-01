@@ -1,72 +1,32 @@
-name: test and sync
+name: release
 
 on:
   push:
-    branches:
-      - main
     tags:
       - "v*"
 
 permissions:
   contents: write
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   release:
-    if: |
-      github.repository == 'ciscotools/aci-collector' && 
-      github.ref_type == 'tag'
     runs-on: ubuntu-latest
     steps:
-      - name: Secrets
-        id: secrets
-        uses: ns-actions/secrets@v2
-        with:
-          secret_manager: conjur
-          secret_map: |
-            cx/caf-secrets/BRIGHTPUDDLE_PAT,
-            cx/caf-secrets/WEBEX_TOKEN
-          url: https://conjur-nonprod.cisco.com
-          username: host/cx/caf-secrets/aci-collector
-          password: ${{ secrets.SECRET_MANAGER_PASSWORD }}
-
-      - name: Checkout
-        uses: cisco-actions/checkout@v4.2.2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          persist-credentials: false
 
-      - name: Setup Go
-        uses: cisco-actions/setup-go@v5.0.2
+      - uses: actions/setup-go@v5
         with:
           go-version: ">=1.25.0"
 
-      - name: Generate
-        run: go generate -v ./...
+      - run: go generate -v ./...
+      - run: go test -v ./...
 
-      - name: Test
-        run: go test -v ./...
-
-      - name: Push to brightpuddle
-        run: |
-          REMOTE_URL="https://brightpuddle:${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}@github.com/brightpuddle/aci-collector.git"
-          git push $REMOTE_URL HEAD:main --tags
-
-      - name: Release
-        uses: cisco-actions/goreleaser-action@v6.4.0
+      - uses: goreleaser/goreleaser-action@v6
         with:
           distribution: goreleaser
           version: latest
           args: release --clean
         env:
-          GITHUB_TOKEN: ${{ steps.secrets.outputs.BRIGHTPUDDLE_PAT }}
-
-      - uses: ns-actions/webex@v1.0.1
-        with:
-          webex_token: ${{ steps.secrets.outputs.WEBEX_TOKEN }}
-          room_id: c7ff6900-82c8-11f0-be76-29ac7d3d9efc
-          template: deploy
-          app_name: "aci-collector"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
