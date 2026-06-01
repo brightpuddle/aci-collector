@@ -1,52 +1,16 @@
-// Package req contains the collector requests
+// Package requests defines the canonical list of ACI object classes and API
+// queries collected by aci-collector. This file is the single source of truth;
+// CI automatically propagates changes to brightpuddle/aci-collector via the
+// sync-collector workflow.
+package requests
 
-// SPDX-License-Identifier: Apache-2.0
-
-// Copyright 2026 Cisco Systems, Inc. and their affiliates
-
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-
-// http://www.apache.org/licenses/LICENSE-2.0
-
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-package req
-
-//go:generate go run ../../cmd/genscript/main.go
-
-import "github.com/brightpuddle/aci-collector/pkg/aci"
-
-// Mod modifies an aci Request
-type Mod = func(*aci.Req)
-
-// Request is an HTTP request.
+// Request is an ACI REST API request.
 type Request struct {
 	Class string            // MO class
 	Query map[string]string // Query parameters
 }
 
-// CLIRequest defines a command to run on the APIC CLI.
-// When using SSH collection the command is run remotely; when using the
-// generated shell script it is run locally on the APIC.
-type CLIRequest struct {
-	Command  string // The shell command to execute
-	Filename string // Output filename in the archive (must end in .txt)
-}
-
-// CLIRequests lists the APIC CLI commands to execute during collection.
-var CLIRequests = []CLIRequest{
-	{
-		Command:  "cat /data/data_admin/sam_exported.config",
-		Filename: "sam_exported_config.txt",
-	},
-}
-
-// Requests contains all the ACI API requests to execute
+// Requests contains all ACI API requests executed by the collector.
 var Requests = []Request{
 	{Class: "faultInst"},
 	{Class: "eqptFlash"},
@@ -161,9 +125,4 @@ var Requests = []Request{
 	{Class: "eqptSysC"},
 	{Class: "cdpAdjEp"},
 	{Class: "lldpAdjEp"},
-}
-
-// GetRequests returns normalized requests
-func GetRequests() ([]Request, error) {
-	return Requests, nil
 }
