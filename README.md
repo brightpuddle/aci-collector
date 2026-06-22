@@ -276,7 +276,15 @@ file. Note that these are not owned by Cisco Systems.
 - [reQuery](https://github.com/brightpuddle/requery) - Run moquery-like queries
   against the collection file from the CLI
 
+# Contributing
+
+See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) for guidelines on how to contribute.
+
+Please review our [Code of Conduct](docs/CODE_OF_CONDUCT.md) and [Security Policy](docs/SECURITY.md).
+
 # License
+
+SPDX-License-Identifier: Apache-2.0
 
 Copyright 2026 Cisco Systems, Inc. and their affiliates
 
