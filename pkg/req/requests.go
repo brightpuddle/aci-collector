@@ -19,12 +19,40 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package requests
+package req
+
+import "github.com/brightpuddle/aci-collector/pkg/aci"
+
+//go:generate go run ../../cmd/genscript/main.go
+
+// Mod modifies an aci Request.
+type Mod = func(*aci.Req)
 
 // Request is an ACI REST API request.
 type Request struct {
 	Class string            // MO class
 	Query map[string]string // Query parameters
+}
+
+// CLIRequest defines a command to run on the APIC CLI.
+// When using SSH collection the command is run remotely; when using the
+// generated shell script it is run locally on the APIC.
+type CLIRequest struct {
+	Command  string // The shell command to execute
+	Filename string // Output filename in the archive (must end in .txt)
+}
+
+// CLIRequests lists the APIC CLI commands to execute during collection.
+var CLIRequests = []CLIRequest{
+	{
+		Command:  "cat /data/data_admin/sam_exported.config",
+		Filename: "sam_exported_config.txt",
+	},
+}
+
+// GetRequests returns normalized requests.
+func GetRequests() ([]Request, error) {
+	return Requests, nil
 }
 
 // Requests contains all ACI API requests executed by the collector.

@@ -76,7 +76,7 @@ func main() {
 	// Write script header
 	fmt.Fprintln(f, "#!/bin/bash")
 	fmt.Fprintln(f, "")
-	fmt.Fprintln(f, ossHeader)
+	fmt.Fprint(f, ossHeader)
 	fmt.Fprintln(f, "")
 	fmt.Fprintf(f, "rm -rf %s > /dev/null\n", tmpFolder)
 	fmt.Fprintf(f, "mkdir %s\n", tmpFolder)
