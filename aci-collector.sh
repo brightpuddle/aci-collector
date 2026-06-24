@@ -1,5 +1,23 @@
 #!/bin/bash
 
+
+
+# SPDX-License-Identifier: Apache-2.0
+
+# Copyright 2026 Cisco Systems, Inc. and their affiliates
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+# http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 rm -rf /tmp/aci-collector > /dev/null
 mkdir /tmp/aci-collector
 
@@ -10,6 +28,8 @@ icurl -kG https://localhost/api/class/topSystem.json > /tmp/aci-collector/topSys
 icurl -kG https://localhost/api/class/isisDomPol.json > /tmp/aci-collector/isisDomPol.json
 icurl -kG https://localhost/api/class/fabricSetupP.json > /tmp/aci-collector/fabricSetupP.json
 icurl -kG https://localhost/api/class/eqptStorage.json > /tmp/aci-collector/eqptStorage.json
+icurl -kG https://localhost/api/class/aaaLoginDomain.json > /tmp/aci-collector/aaaLoginDomain.json
+icurl -kG https://localhost/api/class/aaaDomainAuth.json > /tmp/aci-collector/aaaDomainAuth.json
 icurl -kG https://localhost/api/class/pkiExportEncryptionKey.json > /tmp/aci-collector/pkiExportEncryptionKey.json
 icurl -kG https://localhost/api/class/fvCtx.json > /tmp/aci-collector/fvCtx.json
 icurl -kG https://localhost/api/class/fabricNode.json > /tmp/aci-collector/fabricNode.json
@@ -58,6 +78,7 @@ icurl -kG https://localhost/api/class/infraPortTrackPol.json > /tmp/aci-collecto
 icurl -kG https://localhost/api/class/fabricRsTimePol.json > /tmp/aci-collector/fabricRsTimePol.json
 icurl -kG https://localhost/api/class/datetimePol.json > /tmp/aci-collector/datetimePol.json
 icurl -kG https://localhost/api/class/datetimeNtpProv.json > /tmp/aci-collector/datetimeNtpProv.json
+icurl -kG https://localhost/api/class/datetimeFormat.json > /tmp/aci-collector/datetimeFormat.json
 icurl -kG https://localhost/api/class/fcDomP.json > /tmp/aci-collector/fcDomP.json
 icurl -kG https://localhost/api/class/vmmDomP.json > /tmp/aci-collector/vmmDomP.json
 icurl -kG https://localhost/api/class/infraRsAttEntP.json > /tmp/aci-collector/infraRsAttEntP.json
@@ -72,12 +93,22 @@ icurl -kG https://localhost/api/class/fabricRsNodeCtrl.json > /tmp/aci-collector
 icurl -kG https://localhost/api/class/fabricNodeControl.json > /tmp/aci-collector/fabricNodeControl.json
 icurl -kG https://localhost/api/class/fabricRsSpNodePGrp.json > /tmp/aci-collector/fabricRsSpNodePGrp.json
 icurl -kG https://localhost/api/class/configRsRemotePath.json > /tmp/aci-collector/configRsRemotePath.json
+icurl -kG https://localhost/api/class/configRsExportScheduler.json > /tmp/aci-collector/configRsExportScheduler.json
 icurl -kG https://localhost/api/class/fvcapRule.json > /tmp/aci-collector/fvcapRule.json
 icurl -kG https://localhost/api/class/fvCEp.json -d 'rsp-subtree-include=count' > /tmp/aci-collector/fvCEp.json
 icurl -kG https://localhost/api/class/vzFilter.json > /tmp/aci-collector/vzFilter.json
+icurl -kG https://localhost/api/class/vzRsSubjFiltAtt.json > /tmp/aci-collector/vzRsSubjFiltAtt.json
 icurl -kG https://localhost/api/class/fabricCtrlrConfigP.json > /tmp/aci-collector/fabricCtrlrConfigP.json
 icurl -kG https://localhost/api/class/l3extInstP.json > /tmp/aci-collector/l3extInstP.json
+icurl -kG https://localhost/api/class/l3extSubnet.json > /tmp/aci-collector/l3extSubnet.json
 icurl -kG https://localhost/api/class/fvRsCons.json > /tmp/aci-collector/fvRsCons.json
+icurl -kG https://localhost/api/class/fvRsProv.json > /tmp/aci-collector/fvRsProv.json
+icurl -kG https://localhost/api/class/fvAp.json > /tmp/aci-collector/fvAp.json
+icurl -kG https://localhost/api/class/infraAccPortGrp.json > /tmp/aci-collector/infraAccPortGrp.json
+icurl -kG https://localhost/api/class/infraAccBndlGrp.json > /tmp/aci-collector/infraAccBndlGrp.json
+icurl -kG https://localhost/api/class/infraAccPortP.json > /tmp/aci-collector/infraAccPortP.json
+icurl -kG https://localhost/api/class/infraNodeP.json > /tmp/aci-collector/infraNodeP.json
+icurl -kG https://localhost/api/class/infraLeafS.json > /tmp/aci-collector/infraLeafS.json
 icurl -kG https://localhost/api/class/mcpIfPol.json > /tmp/aci-collector/mcpIfPol.json
 icurl -kG https://localhost/api/class/infraRsMcpIfPol.json > /tmp/aci-collector/infraRsMcpIfPol.json
 icurl -kG https://localhost/api/class/infraRsAccBaseGrp.json > /tmp/aci-collector/infraRsAccBaseGrp.json
@@ -102,6 +133,10 @@ icurl -kG https://localhost/api/class/eqptLC.json > /tmp/aci-collector/eqptLC.js
 icurl -kG https://localhost/api/class/eqptSysC.json > /tmp/aci-collector/eqptSysC.json
 icurl -kG https://localhost/api/class/cdpAdjEp.json > /tmp/aci-collector/cdpAdjEp.json
 icurl -kG https://localhost/api/class/lldpAdjEp.json > /tmp/aci-collector/lldpAdjEp.json
+icurl -kG https://localhost/api/class/infraHIfPol.json > /tmp/aci-collector/infraHIfPol.json
+icurl -kG https://localhost/api/class/mgmtStaticRoute.json > /tmp/aci-collector/mgmtStaticRoute.json
+icurl -kG https://localhost/api/class/qosInstPol.json > /tmp/aci-collector/qosInstPol.json
+icurl -kG https://localhost/api/class/licenseEntitlement.json > /tmp/aci-collector/licenseEntitlement.json
 
 # Collect CLI output
 cat /data/data_admin/sam_exported.config > /tmp/aci-collector/sam_exported_config.txt
